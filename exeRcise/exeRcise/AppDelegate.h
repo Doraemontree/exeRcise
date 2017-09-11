@@ -10,7 +10,6 @@
 #import <CoreData/CoreData.h>
 #import "ViewController.h"
 #import "NaviController.h"
-
 #import "User+CoreDataProperties.h"
 #import "Uinfo+CoreDataProperties.h"
 #import "WalkingData+CoreDataProperties.h"

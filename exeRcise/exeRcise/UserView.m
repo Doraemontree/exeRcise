@@ -157,7 +157,9 @@ static NSString *identifier = @"Cell";
             [[NSNotificationCenter defaultCenter]postNotification:notification];
         }
         else if(indexPath.row == 4){
+            NSNotification *notification = [[NSNotification alloc]initWithName:@"openQRScanViewController" object:nil userInfo:nil];
             
+            [[NSNotificationCenter defaultCenter]postNotification:notification];
         }
     }
     else if(indexPath.section == 1){

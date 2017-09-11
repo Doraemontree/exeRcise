@@ -52,6 +52,7 @@
     [self initUIView];
     
     [self createQRImage];
+    
 }
 
 -(void)initUIView {

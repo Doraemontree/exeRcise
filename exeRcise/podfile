@@ -2,5 +2,7 @@ platform :ios, '10.0'
 pod 'AFNetworking', '~> 3.0'
 pod 'LBXScan/LBXNative','~> 2.0'
 pod 'LBXScan/UI','~> 2.0'
+pod 'MBProgressHUD', '~> 1.0.0'
+pod 'LGAlertView', '~> 2.0.0'
 target 'exeRcise' do
 end

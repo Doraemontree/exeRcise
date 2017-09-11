@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		69183F2C1F6624CB008BDC80 /* UIButtonFunc.m in Sources */ = {isa = PBXBuildFile; fileRef = 69183F2B1F6624CB008BDC80 /* UIButtonFunc.m */; };
+		69183F301F663B48008BDC80 /* UIViewController+ControllerExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 69183F2F1F663B48008BDC80 /* UIViewController+ControllerExtension.m */; };
+		69183F371F664682008BDC80 /* QRScanResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69183F361F664682008BDC80 /* QRScanResultViewController.m */; };
 		693037161F638D6D00FBBD1D /* QRScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 693037151F638D6D00FBBD1D /* QRScanViewController.m */; };
 		693E2E7D1F1DD10E00EB295B /* advertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 693E2E7C1F1DD10E00EB295B /* advertViewController.m */; };
 		693E2E821F1DD14900EB295B /* advertModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 693E2E811F1DD14900EB295B /* advertModel.m */; };
@@ -148,6 +151,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		69183F2A1F6624CB008BDC80 /* UIButtonFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIButtonFunc.h; sourceTree = "<group>"; };
+		69183F2B1F6624CB008BDC80 /* UIButtonFunc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIButtonFunc.m; sourceTree = "<group>"; };
+		69183F2E1F663B48008BDC80 /* UIViewController+ControllerExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ControllerExtension.h"; sourceTree = "<group>"; };
+		69183F2F1F663B48008BDC80 /* UIViewController+ControllerExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ControllerExtension.m"; sourceTree = "<group>"; };
+		69183F351F664682008BDC80 /* QRScanResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRScanResultViewController.h; sourceTree = "<group>"; };
+		69183F361F664682008BDC80 /* QRScanResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRScanResultViewController.m; sourceTree = "<group>"; };
 		693037141F638D6D00FBBD1D /* QRScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRScanViewController.h; sourceTree = "<group>"; };
 		693037151F638D6D00FBBD1D /* QRScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRScanViewController.m; sourceTree = "<group>"; };
 		693E2E7B1F1DD10E00EB295B /* advertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = advertViewController.h; sourceTree = "<group>"; };
@@ -437,11 +446,31 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		693037131F638D4D00FBBD1D /* QRScanVewConroller */ = {
+		69183F281F66249E008BDC80 /* controller */ = {
 			isa = PBXGroup;
 			children = (
 				693037141F638D6D00FBBD1D /* QRScanViewController.h */,
 				693037151F638D6D00FBBD1D /* QRScanViewController.m */,
+				69183F351F664682008BDC80 /* QRScanResultViewController.h */,
+				69183F361F664682008BDC80 /* QRScanResultViewController.m */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
+		69183F291F6624AE008BDC80 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				69183F2A1F6624CB008BDC80 /* UIButtonFunc.h */,
+				69183F2B1F6624CB008BDC80 /* UIButtonFunc.m */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		693037131F638D4D00FBBD1D /* QRScanVewConroller */ = {
+			isa = PBXGroup;
+			children = (
+				69183F291F6624AE008BDC80 /* view */,
+				69183F281F66249E008BDC80 /* controller */,
 			);
 			name = QRScanVewConroller;
 			sourceTree = "<group>";
@@ -877,6 +906,8 @@
 				698DAC6F1EA8EE1400141476 /* pop */,
 				698DAC6B1EA8ECB800141476 /* model */,
 				698DAC411EA7BB7D00141476 /* CoreDataClass */,
+				69183F2E1F663B48008BDC80 /* UIViewController+ControllerExtension.h */,
+				69183F2F1F663B48008BDC80 /* UIViewController+ControllerExtension.m */,
 				698DABF51EA7B43700141476 /* AppDelegate.h */,
 				698DABF61EA7B43700141476 /* AppDelegate.m */,
 				699609941EEEE6EA00932B10 /* Assets.xcassets */,
@@ -1591,11 +1622,14 @@
 				695B26981F0F2BFA0016091C /* WaterFallCollectionLayout.m in Sources */,
 				69960A251EF8226100932B10 /* RegisterModel.m in Sources */,
 				695F4AC31EFD4369008129AE /* alterInfoViewController.m in Sources */,
+				69183F301F663B48008BDC80 /* UIViewController+ControllerExtension.m in Sources */,
 				695F4AB41EFD0D42008129AE /* exerciseModel.m in Sources */,
+				69183F2C1F6624CB008BDC80 /* UIButtonFunc.m in Sources */,
 				693E2E901F1DEF5500EB295B /* ChartModel.m in Sources */,
 				698DACB31EA8EE1F00141476 /* POPVector.mm in Sources */,
 				695F4ABD1EFD1CE0008129AE /* InfoViewController.m in Sources */,
 				695B26C91F1324510016091C /* CartCommodityView.m in Sources */,
+				69183F371F664682008BDC80 /* QRScanResultViewController.m in Sources */,
 				697E221B1EBA2F320057AF4D /* RecordView.m in Sources */,
 				69C653F91EB6423400547DB3 /* ResultView.m in Sources */,
 				698DACA61EA8EE1F00141476 /* POPAnimationExtras.mm in Sources */,
