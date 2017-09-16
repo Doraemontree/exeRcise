@@ -11,6 +11,9 @@
 #import "AppDelegate.h"
 #import "LoginModel.h"
 #import "nDataBase.h"
+#import "ViewControllerHelper.h"
+#import "ViewController.h"
+#import "NaviController.h"
 
 
 
@@ -49,8 +52,6 @@
     
     //开场动画
     [self performSelector:@selector(DoAnimation) withObject:nil afterDelay:0.5];
-
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(notificationAction) name:@"registerToLogin" object:nil];
     
 }
 #pragma mark UI
@@ -200,7 +201,6 @@
             [self.alert setMessage:@"连接超时,请检查网络" isCenter:YES];
             [self.alert ActivityIndicatorViewHidden];
             [self performSelector:@selector(releaseAlert) withObject:nil afterDelay:2.f];
-            
         }
     }];
 }
@@ -247,21 +247,8 @@
     
     self.alert = nil;
 }
--(void)releaseAlertAndPop{
-    [self.alert removeFromSuperview];
-    
-    self.alert = nil;
 
-    CATransition *transition = [CATransition animation];
-    transition.duration = 0.5;
-    transition.type = kCATransitionFromLeft;
-    
-    //kCATransitionMoveIn; //, kCATransitionPush, kCATransitionReveal, kCATransitionFade
-    //    //transition.subtype = kCATransitionFromTop; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom
-    
-    [self.navigationController.view.layer addAnimation:transition forKey:nil];
-    [self.navigationController popViewControllerAnimated:YES];
-}
+
 -(void)afterSuccess{
     //只加载userinfo cdata wdata rdata表
     
@@ -323,7 +310,14 @@
     
     self.checkLastLoginTime();
     
-    [self.navigationController popViewControllerAnimated:YES];
+    ViewController *vc = [[ViewController alloc]init];
+    
+    NaviController *navi = [[NaviController alloc]initWithRootViewController:vc];
+    
+    [ViewControllerHelper changeRootViewControllerWithController:navi
+                                                     withOptions:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionTransitionCrossDissolve
+                                                withDurationTime:1.0 withComplietion:nil];
+    
 }
 
 -(NSString *)getTodayDate{
@@ -338,15 +332,7 @@
     return str;
 }
 
-#pragma mark notification
--(void)notificationAction{
-    //弹出CustomAlert 后退回主界面
-    [self alert];
-    [self.alert setMessage:@"正在注册中" isCenter:NO];
-    
-    [self performSelector:@selector(releaseAlertAndPop) withObject:nil afterDelay:2.f];
-    
-}
+
 
 
 @end

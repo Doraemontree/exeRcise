@@ -8,7 +8,8 @@
 
 #import "AppDelegate.h"
 #import <AFNetworking.h>
-
+#import "ViewControllerModel.h"
+#import "ViewControllerHelper.h"
 
 @interface AppDelegate ()
 
@@ -45,11 +46,9 @@
 //    }];
 //    
 //    [manager.reachabilityManager startMonitoring];
-    
-    //_UserInfoM = [[UserInfoModel alloc]init];//贯穿全局的唯一userinfo保持从数据库读取的信息
-    
-    _userInfo = [[nUserInfo alloc]init];
-    
+
+    _userInfo = [[nUserInfo alloc]init];//贯穿全局的唯一userinfo保持从数据库读取的信息
+
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
     if(![userDefault objectForKey:@"id"]){
@@ -59,16 +58,59 @@
     else{
         NSLog(@"exist");
     }
-
-    ViewController *v = [[ViewController alloc]initWithNibName:nil bundle:nil];
     
-    NaviController *navi = [[NaviController alloc]initWithRootViewController:v];
+    //获取上个用户登录帐号
+//    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    NSString *uid = [userDefault objectForKey:@"id"];
+    
+    ViewControllerModel *model = [[ViewControllerModel alloc]init];
     
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    
-    self.window.rootViewController = navi;
-    
-    [self.window makeKeyAndVisible];
+
+    /*判断写到appdelegate 不会重复加载viewcontroller viewdidload只加载界面不做逻辑判断*/
+    //如果uid是空值
+    if([uid isEqualToString:@""]){//没有默认用户则进入下载界面
+        
+        LoginViewController *login = [[LoginViewController alloc]init];//登录界面
+        
+        NaviController *navi = [[NaviController alloc]initWithRootViewController:login];
+        
+        self.window.rootViewController = navi;
+        
+        [self.window makeKeyAndVisible];
+        
+        //检查上次登录时间
+        login.checkLastLoginTime = ^{
+            NSLog(@"checkLastLoginTimeBlock");
+            //更新最后登录时间和今天的运动情况
+            [model autoUpdateLastLoginTimeAndTodayCDT];
+            
+            //这个时候userinfo的uid已经初始化了
+            //模型从服务器上下载用户头像
+            [model DownloadUserImageTolocalWithUid:_userInfo.uid];
+            
+        };
+        login.refreshViewBlock = ^{
+            NSLog(@"refreshViewBlock");
+        };
+    }
+    else{//有默认登陆用户则从本地下载数据到appdelegate
+        //创建模型
+        ViewController *v = [[ViewController alloc]initWithNibName:nil bundle:nil];
+        
+        NaviController *navi = [[NaviController alloc]initWithRootViewController:v];
+        
+        self.window.rootViewController = navi;
+        
+        [self.window makeKeyAndVisible];
+        
+        _userInfo = [model GetUserInfo:uid];
+        
+        [model autoUpdateLastLoginTimeAndTodayCDT];
+        
+        [model DownloadUserImageTolocalWithUid:uid];
+    }
     
     return YES;
 }

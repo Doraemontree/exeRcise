@@ -36,8 +36,6 @@
     u.name          = [dic objectForKey:@"name"];
     u.lastLoginTime = [dic objectForKey:@"lastLoginTime"];
     
-    NSLog(@"%@",u.password);
-    
     [self.appDelegate saveContext];
 }
 

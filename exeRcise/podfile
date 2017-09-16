@@ -1,8 +1,17 @@
 platform :ios, '10.0'
-pod 'AFNetworking', '~> 3.0'
-pod 'LBXScan/LBXNative','~> 2.0'
-pod 'LBXScan/UI','~> 2.0'
-pod 'MBProgressHUD', '~> 1.0.0'
-pod 'LGAlertView', '~> 2.0.0'
+
+def myPods
+    pod 'AFNetworking', '~> 3.0'
+    pod 'LBXScan/LBXNative','~> 2.0'
+    pod 'LBXScan/UI','~> 2.0'
+    pod 'MBProgressHUD', '~> 1.0.0'
+    pod 'LGAlertView', '~> 2.0.0'
+end
+
 target 'exeRcise' do
+    myPods
+end
+
+target 'test' do
+    myPods
 end

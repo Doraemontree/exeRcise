@@ -20,12 +20,17 @@
 #import "ChartViewController.h"
 #import "QRCodeViewController.h"
 #import "QRScanViewController.h"
+#import "ViewControllerHelper.h"
+
 
 @interface ViewController (){
     ViewControllerModel *model;
 }
 
 @property(nonatomic,strong)AppDelegate *appDelegate;
+
+@property BOOL didLogin;
+
 @end
 
 @implementation ViewController
@@ -34,49 +39,31 @@
     return (AppDelegate *)[[UIApplication sharedApplication]delegate];
 }
 
+- (instancetype)initWithDidLogin
+{
+    self = [super init];
+    if (self) {
+        
+        _didLogin = YES;
+        
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //获取上个用户登录帐号
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-
-    NSString *uid = [userDefault objectForKey:@"id"];
-    
-    model = [[ViewControllerModel alloc]init];
-    
-    //如果uid是空值
-    if([uid isEqualToString:@""]){//没有默认用户则进入下载界面
-        LoginViewController *login = [[LoginViewController alloc]init];//登录界面
-        
-        [self.navigationController pushViewController:login animated:NO];
-        
-        //检查上次登录时间
-        login.checkLastLoginTime = ^{
-            //更新最后登录时间和今天的运动情况
-            [model autoUpdateLastLoginTimeAndTodayCDT];
-            
-            //这个时候userinfo的uid已经初始化了
-            //模型从服务器上下载用户头像
-            [model DownloadUserImageTolocalWithUid:self.appDelegate.userInfo.uid];
-
-        };
-        login.refreshViewBlock = ^{};
-    }
-    else{//有默认登陆用户则从本地下载数据到appdelegate
-        //创建模型
-        self.appDelegate.userInfo = [model GetUserInfo:uid];
-        
-        [model autoUpdateLastLoginTimeAndTodayCDT];
-
-        [model DownloadUserImageTolocalWithUid:uid];
-    }
+    NSLog(@"%@",self);
     
     //个人界面UI
     [self userView];
     //多功能界面UI
     [self multfunctionView];
+//preprocessor macros 命令 区别target
+#if KE
     //主界面UI
     [self mainView];
+#endif
     //横条UI
     [self Ctabbar];
     
@@ -173,6 +160,8 @@
     
     LoginViewController *login = [[LoginViewController alloc]init];
     
+    NaviController *navi = [[NaviController alloc]initWithRootViewController:login];
+    
     login.refreshViewBlock = ^(void){
         [self refreshMainView];
     };
@@ -182,8 +171,11 @@
         //这个时候userinfo的uid已经初始化了
         [model DownloadUserImageTolocalWithUid:self.appDelegate.userInfo.uid];
     };
+    
+    [ViewControllerHelper changeRootViewControllerWithController:navi
+                                                     withOptions:UIViewAnimationOptionTransitionNone
+                                                withDurationTime:0.5 withComplietion:nil];
 
-    [self.navigationController pushViewController:login animated:YES];
 }
 
 -(void)refreshMainView{//重新登录刷新所有显示界面
@@ -213,7 +205,6 @@
     ShopViewController *vc = [[ShopViewController alloc]init];
     
     [self.navigationController pushViewController:vc animated:YES];
-    
 }
 
 -(void)gotoExerciseControllerWithNumber:(NSNotification *)notification{
@@ -223,7 +214,6 @@
     exericseViewController *vc = [[exericseViewController alloc]initWithCellNumber:n];
     
     [self.navigationController pushViewController:vc animated:YES];
-
 }
 
 -(void)openAnaylseViewController{

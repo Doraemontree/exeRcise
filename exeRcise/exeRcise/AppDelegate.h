@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "ViewController.h"
+#import "LoginViewController.h"
 #import "NaviController.h"
 #import "User+CoreDataProperties.h"
 #import "Uinfo+CoreDataProperties.h"

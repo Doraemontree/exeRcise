@@ -80,7 +80,7 @@
         NSString *fullpath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
         
         [responseObject writeToFile:fullpath options:NSDataWritingWithoutOverwriting error:nil];
-        
+        /*先判断有木有viewcontroller*/
         NSNotification *noti = [NSNotification notificationWithName:@"finishDownloadImage" object:nil];
         
         [[NSNotificationCenter defaultCenter]postNotification:noti];
@@ -135,7 +135,6 @@
         
         [manager POST:@"http://139.199.158.105/setTodayDate.php" parameters:DateDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
-            NSLog(@"%@",[[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding]);
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@",error);

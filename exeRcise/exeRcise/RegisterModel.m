@@ -47,7 +47,7 @@
     user.aimD          = [[dic objectForKey:@"aimD"] floatValue];
     user.aimT          = [[dic objectForKey:@"aimT"] floatValue];
     
-    for(int i=0;i<5;i++){
+    for(int i = 0; i < 6; i++) {
         [user.runningAr addObject:[NSNumber numberWithFloat:0]];
         [user.cyclingAr addObject:[NSNumber numberWithFloat:0]];
         [user.walkingAr addObject:[NSNumber numberWithFloat:0]];

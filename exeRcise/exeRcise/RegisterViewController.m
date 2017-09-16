@@ -9,6 +9,9 @@
 #import "RegisterViewController.h"
 #import <UIKit+AFNetworking.h>
 #import "RegisterModel.h"
+#import "ViewControllerHelper.h"
+#import "NaviController.h"
+#import "ViewController.h"
 
 @interface RegisterViewController ()<genderViewDelegate,UITextFieldDelegate>{
     RegisterModel *Rmodel;
@@ -36,8 +39,7 @@
     [self createBtn];
     
     [self createLabel];
-    
-    // Do any additional setup after loading the view.
+
 }
 #pragma mark ui
 -(customAlert *)alert{
@@ -245,8 +247,6 @@
         
         NSString *r = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
         
-        NSLog(@"%@",r);
-        
         if([r isEqualToString:@"HasSameId"]){
             
             [self.alert setMessage:@"该账号已经存在!" isCenter:YES];
@@ -266,13 +266,14 @@
             self.appDelegate.userInfo = [Rmodel setUserInfoWithUserInfoDic:dic];
             
             [Rmodel addDataToLocalDataBaseWithUserDic:dic];//成功注册后的操作 添加数据进入本地数据库
+
+            ViewController *vc = [[ViewController alloc]init];
             
-            //发送通知 通知login页面
-            NSNotification *noti = [NSNotification notificationWithName:@"registerToLogin" object:nil];
-            [[NSNotificationCenter defaultCenter]postNotification:noti];
+            NaviController *navi = [[NaviController alloc]initWithRootViewController:vc];
             
-            [self.navigationController popViewControllerAnimated:YES];
-            
+            [ViewControllerHelper changeRootViewControllerWithController:navi
+                                                             withOptions:UIViewAnimationOptionTransitionCrossDissolve
+                                                        withDurationTime:1.0 withComplietion:nil];
         }
         else if([r isEqualToString:@"QueryError"]){
             NSLog(@"服务器错误");
