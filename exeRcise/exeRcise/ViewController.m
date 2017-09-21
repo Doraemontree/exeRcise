@@ -53,8 +53,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"%@",self);
-    
     //个人界面UI
     [self userView];
     //多功能界面UI

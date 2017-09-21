@@ -9,6 +9,7 @@
 #import "MapRecordViewController.h"
 #import "MapRecordModel.h"
 #import "AppDelegate.h"
+
 @interface MapRecordViewController (){
     __block NSArray *RecordAr;
     
@@ -20,6 +21,7 @@
 @end
 
 @implementation MapRecordViewController
+
 - (instancetype)initWithMapRecordNum:(int)num
 {
     self = [super init];
@@ -29,9 +31,11 @@
     }
     return self;
 }
+
 -(AppDelegate *)appDelegate{
     return (AppDelegate *)[[UIApplication sharedApplication]delegate];
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor redColor];
@@ -49,9 +53,9 @@
 
     //接受消息
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(noti) name:@"SuccessGetRecord" object:nil];
-    
-    // Do any additional setup after loading the view.
+
 }
+
 -(MapRecordView *)mapRecordView{
     if(!_mapRecordView){
         self.mapRecordView = [[MapRecordView alloc]initWithFrame:CGRectMake(0, 65, 375, 602)];
@@ -60,6 +64,7 @@
     }
     return _mapRecordView;
 }
+
 -(void)GETMapTrack{
     MapRecordModel *model = [[MapRecordModel alloc]init];
     

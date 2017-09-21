@@ -126,6 +126,7 @@ static const UIEdgeInsets defaultEdgeInsets = {5,5,5,5};
     
     return attrs;
 }
+
 - (NSInteger)columCount{
     if([self.delegate respondsToSelector:@selector(columnCountInWaterFallLayout:)]){
         return [self.delegate columnCountInWaterFallLayout:self];
@@ -134,6 +135,7 @@ static const UIEdgeInsets defaultEdgeInsets = {5,5,5,5};
         return columCount;
     }
 }
+
 - (CGFloat)columMargin{
     if([self.delegate respondsToSelector:@selector(columnMarginInWaterFallLayout:)]){
         return [self.delegate columnMarginInWaterFallLayout:self];
@@ -142,6 +144,7 @@ static const UIEdgeInsets defaultEdgeInsets = {5,5,5,5};
         return columMargin;
     }
 }
+
 - (CGFloat)rowMargin{
     if ([self.delegate respondsToSelector:@selector(rowMarginInWaterFallLayout:)]) {
         return  [self.delegate rowMarginInWaterFallLayout:self];
@@ -150,6 +153,7 @@ static const UIEdgeInsets defaultEdgeInsets = {5,5,5,5};
         return rowMargin;
     }
 }
+
 - (UIEdgeInsets)defaultEdgeInsets{
     if ([self.delegate respondsToSelector:@selector(edgesInsetsWaterFallLayout:)]) {
         return  [self.delegate edgesInsetsWaterFallLayout:self];

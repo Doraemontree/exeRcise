@@ -14,4 +14,5 @@
 @property(nonatomic,strong)UICollectionView *collectionView;
 
 - (instancetype)initWithItemStr:(NSString *)str;
+
 @end

@@ -124,7 +124,7 @@
         _detail.center          = CGPointMake(self.bounds.size.width/2, 130);
         _detail.backgroundColor = [UIColor colorWithRed:60/255.0 green:104/255.0 blue:175/255.0 alpha:1];
         
-        [_detail setTitle:@"点击此处查看详细记录" forState:UIControlStateNormal];
+        [_detail setTitle:NSLocalizedString(@"label_button", "") forState:UIControlStateNormal];
         [_detail addTarget:self action:@selector(detailBtnAction) forControlEvents:UIControlEventTouchUpInside];
         
         [self addSubview:_detail];

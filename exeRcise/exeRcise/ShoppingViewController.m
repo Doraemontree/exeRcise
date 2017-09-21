@@ -10,7 +10,10 @@
 #import "WaterFallCollectionLayout.h"
 #import "ShoppingModel.h"
 #import "PurchaseViewController.h"
+#import "CustomRefreshControl.h"
 
+
+#define HEIGHT_REFRESH -140
 
 static NSString *identifier = @"Cell";
 
@@ -41,6 +44,7 @@ static NSString *identifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     //通知
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
@@ -60,11 +64,11 @@ static NSString *identifier = @"Cell";
     
     model.returnArray = ^(NSArray *array){
         commodityInfo = [NSArray arrayWithArray:array];
-        
     };
+    
     ImageHeight = [NSMutableArray array];
-    // Do any additional setup after loading the view.
 }
+
 -(void)backAction{
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -80,12 +84,21 @@ static NSString *identifier = @"Cell";
         imageAr = ar;
         
         [self collectionView];
+        
+        self.collectionView.alwaysBounceVertical = YES;
+        
+        
+        [self.collectionView addRefreshHeaderWithHandle:^{
+            
+        }];
+    
     };
 }
-//
+
 -(void)createCollectionView{
     [self getImage];
 }
+
 
 #pragma mark collectionDelegate
 -(UICollectionView *)collectionView{
@@ -93,7 +106,7 @@ static NSString *identifier = @"Cell";
         WaterFallCollectionLayout *layout = [[WaterFallCollectionLayout alloc]init];
         layout.delegate = self;
         
-        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 60, 375, 617) collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc]initWithFrame: CGRectMake(0, 60, 375, 617) collectionViewLayout:layout];
         _collectionView.backgroundColor = [UIColor colorWithRed:234.0/255.0 green:238.0/255.0 blue:242.0/255.0 alpha:1];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -135,7 +148,7 @@ static NSString *identifier = @"Cell";
     
     vc.imageCover([imageAr objectAtIndex:indexPath.row]);
     
-    //把所点击的item的信心传过去
+    //把所点击的item的信息传过去
     NSNotification *noti = [NSNotification notificationWithName:@"passCommodityInfo" object:nil userInfo:[commodityInfo objectAtIndex:indexPath.row]];
     
     [[NSNotificationCenter defaultCenter]postNotification:noti];
@@ -147,6 +160,7 @@ static NSString *identifier = @"Cell";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+
 #pragma mark waterfallDelegate
 -(CGFloat)waterFlowLayout:(WaterFallCollectionLayout *)waterFallLayout heightForRowAtIndexPath:(NSInteger)index itemWidth:(CGFloat)width{
     
@@ -155,8 +169,8 @@ static NSString *identifier = @"Cell";
     [ImageHeight addObject:@(h)];
     
     return 290 + h;
-    
 }
+
 //决定cell的列数
 -(NSInteger)columnCountInWaterFallLayout:(WaterFallCollectionLayout *)waterFallLayout{
     return 2;
@@ -171,6 +185,8 @@ static NSString *identifier = @"Cell";
 -(CGFloat)rowMarginInWaterFallLayout:(WaterFallCollectionLayout *)waterFallLayout{
     return 5.0;
 }
+
+
 
 
 @end
